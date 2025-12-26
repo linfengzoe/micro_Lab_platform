@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy of an AI Robotic Arm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbfbfd; color: #1d1d1f; }
+        
+        /* 玻璃态效果 */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 渐变文字 */
+        .text-gradient {
+            background: linear-gradient(90deg, #0071e3, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 代码窗口 */
+        .code-window {
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        /* 管道动画 */
+        .pipeline-line {
+            position: relative;
+            height: 4px;
+            background: #e5e5e5;
+            flex-grow: 1;
+            margin: 0 10px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+        
+        .data-particle {
+            position: absolute;
+            top: 0;
+            left: -20%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #0071e3, transparent);
+            animation: flow 2s infinite linear;
+        }
+
+        @keyframes flow {
+            0% { left: -30%; }
+            100% { left: 100%; }
+        }
+
+        .node-hover:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 113, 227, 0.2);
+            border-color: #0071e3;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-tight">Robo<span class="text-blue-600">Flow</span></div>
+            <div class="space-x-8 text-sm font-medium text-gray-600 hidden md:block">
+                <a href="#architecture" class="hover:text-blue-600 transition">Architecture</a>
+                <a href="#core" class="hover:text-blue-600 transition">The Core</a>
+                <a href="#pipeline" class="hover:text-blue-600 transition">Pipeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-30">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+        
+        <div class="z-10 max-w-4xl space-y-6">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-wide uppercase mb-2">System V1.0 Ready</span>
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 leading-tight">
+                From Command <br> to <span class="text-gradient">Physical Action</span>
+            </h1>
+            <p class="text-xl text-gray-500 max-w-2xl mx-auto font-light">
+                An integrated robotic architecture powered by <strong class="text-slate-800">DeepSeek LLM</strong> and <strong class="text-slate-800">Qwen-VL</strong> perception.
+            </p>
+            <div class="pt-8">
+                <a href="#architecture" class="px-8 py-4 bg-slate-900 text-white rounded-full font-medium hover:bg-blue-600 transition duration-300 shadow-lg hover:shadow-blue-500/30">
+                    Explore Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">The Triad System</h2>
+                <p class="text-gray-500 mt-2">The Brain, The Eyes, and The Hand.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group p-8 border border-gray-200 rounded-3xl hover:shadow-2xl hover:border-blue-100 transition duration-500 cursor-pointer bg-white relative overflow-hidden" onclick="openModal('brain')">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-microchip text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">The Brain (Agent)</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">Powered by Jetson Nano & DeepSeek.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-semibold">
+                        Learn more <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+
+                <div class="group p-8 border border-gray-200 rounded-3xl hover:shadow-2xl hover:border-purple-100 transition duration-500 cursor-pointer bg-white" onclick="openModal('eyes')">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-eye text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">The Eyes (Perception)</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">Vision Language Model (Qwen-VL).</p>
+                    <div class="flex items-center text-purple-600 text-sm font-semibold">
+                        Learn more <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+
+                <div class="group p-8 border border-gray-200 rounded-3xl hover:shadow-2xl hover:border-orange-100 transition duration-500 cursor-pointer bg-white" onclick="openModal('hand')">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">The Hand (Execution)</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">MyCobot 6-Axis Robotic Arm.</p>
+                    <div class="flex items-center text-orange-600 text-sm font-semibold">
+                        Learn more <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="core" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+                <div class="w-full lg:w-1/2">
+                    <div class="mb-6">
+                        <h2 class="text-3xl font-bold text-slate-900">The Core Algorithm</h2>
+                        <p class="text-gray-500 mt-2">Bridging the digital pixel space to physical coordinates via Affine Transformation.</p>
+                    </div>
+                    <div class="code-window p-4 text-sm overflow-hidden border border-gray-700">
+                        <div class="flex space-x-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-gray-300 font-mono overflow-x-auto"><code><span class="text-purple-400">import</span> numpy <span class="text-purple-400">as</span> np
+
+<span class="text-gray-500"># Hand-Eye Calibration Matrix</span>
+<span class="text-blue-400">def</span> <span class="text-yellow-400">pixel_to_physical</span>(u, v, M):
+    <span class="text-green-400">"""
+    Convert (u,v) pixel coords to (x,y)
+    using Affine Transformation Matrix M
+    """</span>
+    pixel_vector = np.array([u, v, <span class="text-orange-400">1</span>])
+    
+    <span class="text-gray-500"># M dot Product</span>
+    physical_vector = M @ pixel_vector
+    
+    x = physical_vector[<span class="text-orange-400">0</span>]
+    y = physical_vector[<span class="text-orange-400">1</span>]
+    
+    <span class="text-purple-400">return</span> (x, y)</code></pre>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 flex justify-center">
+                    <div class="relative w-80 h-80 bg-white rounded-3xl shadow-xl border border-gray-100 flex items-center justify-center">
+                        <div class="absolute inset-4 border-2 border-dashed border-gray-200 rounded-xl grid grid-cols-4 grid-rows-4 gap-4 p-4">
+                            <div class="bg-blue-100 rounded opacity-50"></div>
+                            <div class="col-start-3 row-start-2 bg-blue-600 rounded shadow-lg transform rotate-12 transition hover:scale-125 duration-300"></div> </div>
+                        <div class="absolute -right-4 -bottom-4 bg-white p-4 rounded-xl shadow-lg border border-gray-100 text-xs font-mono">
+                            <div>x: 124.5mm</div>
+                            <div>y: 88.2mm</div>
+                            <div class="text-green-500">Ready to Grab</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pipeline" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">Data Pipeline & Latency</h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 relative">
+                
+                <div class="flex flex-col items-center z-10 w-full md:w-auto">
+                    <div class="w-16 h-16 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center shadow-sm node-hover transition duration-300 relative group">
+                        <i class="fas fa-comment-dots text-gray-600"></i>
+                        <div class="absolute -top-10 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">Input</div>
+                    </div>
+                    <span class="mt-4 text-sm font-semibold text-gray-600">User Command</span>
+                </div>
+
+                <div class="pipeline-line hidden md:block">
+                    <div class="data-particle" style="animation-duration: 1.5s;"></div>
+                </div>
+
+                <div class="flex flex-col items-center z-10 w-full md:w-auto">
+                    <div class="w-16 h-16 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center shadow-lg shadow-blue-200 node-hover transition duration-300 relative group">
+                        <i class="fas fa-brain text-blue-600"></i>
+                        <div class="absolute -top-12 bg-slate-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                            Reasoning: ~1.2s
+                            <div class="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-slate-800 rotate-45"></div>
+                        </div>
+                    </div>
+                    <span class="mt-4 text-sm font-semibold text-blue-600">AI Reasoning</span>
+                </div>
+
+                <div class="pipeline-line hidden md:block">
+                    <div class="data-particle" style="animation-duration: 1s;"></div>
+                </div>
+
+                <div class="flex flex-col items-center z-10 w-full md:w-auto">
+                    <div class="w-16 h-16 rounded-full bg-white border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-200 node-hover transition duration-300 relative group">
+                        <i class="fas fa-camera text-purple-600"></i>
+                        <div class="absolute -top-12 bg-slate-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                            Vision Parse: ~0.4s
+                        </div>
+                    </div>
+                    <span class="mt-4 text-sm font-semibold text-purple-600">Perception</span>
+                </div>
+
+                 <div class="pipeline-line hidden md:block">
+                    <div class="data-particle" style="animation-duration: 0.2s;"></div>
+                </div>
+
+                <div class="flex flex-col items-center z-10 w-full md:w-auto">
+                    <div class="w-16 h-16 rounded-full bg-white border-2 border-orange-500 flex items-center justify-center shadow-lg shadow-orange-200 node-hover transition duration-300 relative group">
+                        <i class="fas fa-hand-holding-box text-orange-600"></i>
+                        <div class="absolute -top-12 bg-slate-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                            Action: ~2.0s
+                        </div>
+                    </div>
+                    <span class="mt-4 text-sm font-semibold text-orange-600">Execution</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300" id="modal-content" onclick="event.stopPropagation()">
+            <h3 id="modal-title" class="text-2xl font-bold mb-4 text-slate-900">Title</h3>
+            <p id="modal-body" class="text-gray-600 leading-relaxed">Content</p>
+            <div class="mt-8 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 bg-white border-t border-gray-100 text-center">
+        <p class="text-gray-400 text-sm">© 2024 AI Robotic Arm Project. Built for CS Dept.</p>
+    </footer>
+
+    <script>
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+
+        const contentMap = {
+            'brain': {
+                title: 'The Brain: Jetson Nano + DeepSeek',
+                body: 'The Jetson Nano serves as the edge computing unit. DeepSeek LLM runs locally (or via API) to interpret natural language commands like "Grab the blue cube" and decomposes them into a sequence of logical steps: [Locate] -> [Plan] -> [Execute].'
+            },
+            'eyes': {
+                title: 'The Eyes: Qwen-VL Vision Model',
+                body: 'A USB camera mounted on the arm feeds video to the VLM. The model performs object detection and semantic segmentation to identify the "Blue Cube" and extracts its pixel coordinates (u, v) in the image frame.'
+            },
+            'hand': {
+                title: 'The Hand: MyCobot 6-Axis',
+                body: 'The physical execution unit. It receives the transformed physical coordinates (x, y, z) and performs inverse kinematics to move the end-effector to the target location for gripping.'
+            }
+        };
+
+        function openModal(type) {
+            const data = contentMap[type];
+            if(data) {
+                modalTitle.innerText = data.title;
+                modalBody.innerText = data.body;
+                
+                modalOverlay.classList.remove('hidden');
+                // 略微延迟，确保先切换为块级显示，再执行透明度过渡
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            modalOverlay.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>

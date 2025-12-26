@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验微课平台 - 智能机械臂垃圾分类</title>
+    <!-- 引入HTML5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入网页字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg sticky-top border-bottom">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <img src="3logo20250804.png" alt="智能机械臂微课平台 logo" class="site-logo">
+                <span>智能机械臂微课平台</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="mainNav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-target="section-design">系统架构</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-mindmap">思维导图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-details">项目图解</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-video">微课视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-tutorial">详细流程</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-flashcards">知识闪卡</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="section-demo">交互演示</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+
+        <!-- 分区：系统架构（标签页布局） -->
+        <div id="section-design" class="app-section active">
+            <div class="design-wrapper">
+                
+                <!-- 首屏区 -->
+                <div class="design-hero text-center py-5">
+                    <div class="hero-bg-mesh"></div>
+                    <div class="hero-stage">
+                        <h1 class="hero-title">
+                            AI 机械臂
+                            <span class="hero-title-accent">系统解构</span>
+                        </h1>
+                        <p class="hero-subtitle">Anatomy of an AI Robotic Arm: 从指令到行动的完整链路</p>
+                        <div class="hero-theme">
+                            <span><i class="fas fa-microchip me-2"></i>DeepSeek LLM</span>
+                            <span class="hero-divider">|</span>
+                            <span><i class="fas fa-eye me-2"></i>VLM Perception</span>
+                            <span class="hero-divider">|</span>
+                            <span><i class="fas fa-robot me-2"></i>6-Axis Control</span>
+                        </div>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <button class="btn btn-primary btn-lg px-5 js-design-explore hero-cta" data-target-tab="#tab-triad">
+                                点击探索 <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 标签导航（胶囊样式） -->
+                <div class="container mb-4">
+                    <ul class="nav nav-pills nav-fill tech-nav-pills is-locked justify-content-center gap-3" id="designTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill px-4 py-3 border shadow-sm d-flex align-items-center justify-content-center" id="tab-triad-btn" data-bs-toggle="pill" data-bs-target="#tab-triad" type="button" role="tab">
+                                <i class="fas fa-cubes me-2"></i> 核心三要素 (The Triad)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill px-4 py-3 border shadow-sm d-flex align-items-center justify-content-center" id="tab-mapping-btn" data-bs-toggle="pill" data-bs-target="#tab-mapping" type="button" role="tab" onclick="setTimeout(onResize, 100)">
+                                <i class="fas fa-project-diagram me-2"></i> 核心挑战：空间映射 (Mapping)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill px-4 py-3 border shadow-sm d-flex align-items-center justify-content-center" id="tab-pipeline-btn" data-bs-toggle="pill" data-bs-target="#tab-pipeline" type="button" role="tab">
+                                <i class="fas fa-stream me-2"></i> 数据流与延迟 (Pipeline)
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 标签内容 -->
+                <div class="tab-content" id="designTabContent">
+                    
+                    <!-- 标签 1：核心三要素 -->
+                    <div class="tab-pane fade show active" id="tab-triad" role="tabpanel">
+                        <div class="container mb-5">
+                            <div class="row g-4 justify-content-center">
+                                <!-- 卡片 1：大脑 -->
+                                <div class="col-md-4">
+                                    <div class="design-card h-100 shadow-sm border-0" onclick="showDesignModal('brain')">
+                                        <div class="card-icon-wrapper bg-soft-purple mb-4">
+                                            <i class="fas fa-brain text-purple fa-2x"></i>
+                                        </div>
+                                        <h4 class="mb-2 fw-bold">大脑 (Agent)</h4>
+                                        <p class="text-muted small mb-3">DeepSeek LLM on Jetson Nano</p>
+                                        <p class="text-secondary small">负责自然语言理解与任务规划，生成工具调用链。</p>
+                                        <div class="design-card-hover-overlay">
+                                            <span>点击查看详情 <i class="fas fa-arrow-right ms-1"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 卡片 2：眼睛 -->
+                                <div class="col-md-4">
+                                    <div class="design-card h-100 shadow-sm border-0" onclick="showDesignModal('eyes')">
+                                        <div class="card-icon-wrapper bg-soft-blue mb-4">
+                                            <i class="fas fa-eye text-primary fa-2x"></i>
+                                        </div>
+                                        <h4 class="mb-2 fw-bold">眼睛 (Perception)</h4>
+                                        <p class="text-muted small mb-3">Qwen-VL Vision Model</p>
+                                        <p class="text-secondary small">多模态视觉模型，提供语义级的物体识别与定位。</p>
+                                        <div class="design-card-hover-overlay">
+                                            <span>点击查看详情 <i class="fas fa-arrow-right ms-1"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 卡片 3：手 -->
+                                <div class="col-md-4">
+                                    <div class="design-card h-100 shadow-sm border-0" onclick="showDesignModal('hand')">
+                                        <div class="card-icon-wrapper bg-soft-green mb-4">
+                                            <i class="fas fa-robot text-success fa-2x"></i>
+                                        </div>
+                                        <h4 class="mb-2 fw-bold">手 (Execution)</h4>
+                                        <p class="text-muted small mb-3">MyCobot 6-Axis Arm</p>
+                                        <p class="text-secondary small">基于逆运动学解算，执行精准的抓取与放置动作。</p>
+                                        <div class="design-card-hover-overlay">
+                                            <span>点击查看详情 <i class="fas fa-arrow-right ms-1"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-secondary rounded-pill px-4 js-design-explore" data-target-tab="#tab-mapping">
+                                点击探索：核心挑战 <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 标签 2：空间映射 -->
+                    <div class="tab-pane fade" id="tab-mapping" role="tabpanel">
+                        <div class="container py-4">
+                            <div class="text-center mb-4">
+                                <p class="lead text-secondary mx-auto" style="max-width: 800px;">
+                                    从 <span class="badge bg-info bg-opacity-10 text-info">2D 像素</span> 到 <span class="badge bg-success bg-opacity-10 text-success">3D 物理</span> 的桥梁
+                                </p>
+                            </div>
+
+                            <div class="row align-items-stretch mb-5" style="min-height: 500px;">
+                                <div class="col-lg-5 mb-4 mb-lg-0">
+                                    <!-- 一体化代码窗口 -->
+                                    <div class="ide-window shadow-lg rounded-4 overflow-hidden d-flex flex-column h-100" style="border: 1px solid #333; background-color: #1e1e1e;">
+                                        <!-- 顶栏 -->
+                                        <div class="ide-header p-3 d-flex justify-content-between align-items-center" style="background-color: #252526; border-bottom: 1px solid #333;">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="rounded-circle" style="width:10px; height:10px; background:#ff5f56;"></div>
+                                                <div class="rounded-circle" style="width:10px; height:10px; background:#ffbd2e;"></div>
+                                                <div class="rounded-circle" style="width:10px; height:10px; background:#27c93f;"></div>
+                                                <span class="ms-3 text-secondary small font-monospace">affine_transform.py</span>
+                                            </div>
+                                            <span class="badge bg-white bg-opacity-10 text-white border border-secondary border-opacity-25 rounded-pill px-2 py-1 small">Python</span>
+                                        </div>
+
+                                        <!-- 代码 -->
+                                        <div class="ide-body flex-grow-1 p-0" style="background-color: #1e1e1e; overflow-y: auto;">
+                                            <div class="p-3">
+<pre class="m-0"><code class="language-python" style="color: #d4d4d4; font-family: 'Consolas', monospace; white-space: pre;">import numpy as np
+
+<span style="color: #6a9955;"># 标定矩阵 M (由 calibrate.py 获得)</span>
+M = np.array([
+    [ 0.52, -0.04, -120.5],
+    [-0.03,  0.55,   45.2],
+    [ 0.00,  0.00,    1.00]
+])
+
+<span style="color: #569cd6;">def</span> <span style="color: #dcdcaa;">pixel_to_arm</span>(u, v):
+    <span style="color: #ce9178;">"""将像素坐标(u,v)转换为机械臂坐标(x,y)"""</span>
+    <span style="color: #6a9955;"># 1. 构建齐次坐标向量</span>
+    pixel_point = np.array([u, v, 1])
+    
+    <span style="color: #6a9955;"># 2. 矩阵乘法: Arm = M @ Pixel</span>
+    arm_point = np.dot(M, pixel_point)
+    
+    <span style="color: #c586c0;">return</span> round(arm_point[0], 2), round(arm_point[1], 2)
+
+<span style="color: #6a9955;"># --- 运行测试 ---</span>
+u, v = <span class="text-warning" id="code-u">552</span>, <span class="text-warning" id="code-v">347</span>
+x, y = pixel_to_arm(u, v)
+print(f<span style="color: #ce9178;">"Pixel({u}, {v}) -> Robot({x}, {y})"</span>)</code></pre>
+                                            </div>
+                                        </div>
+
+                                        <!-- 终端 -->
+                                        <div class="ide-console border-top border-secondary border-opacity-25 p-3" style="height: 120px; font-family: 'Consolas', monospace; font-size: 0.8rem; background-color: #1e1e1e;">
+                                    <div class="d-flex justify-content-between text-secondary mb-2" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                                        <span>TERMINAL</span>
+                                        <span><i class="fas fa-check-circle text-success me-1"></i>Connected</span>
+                                    </div>
+                                    <div id="affine-console" class="text-light font-monospace" style="opacity: 0.9; line-height: 1.5;">
+                                        <span style="color: #6a9955;">➜</span> 初始化仿射矩阵... <span style="color: #6a9955;">完成</span><br>
+                                        <span style="color: #569cd6;">ℹ</span> 模式: <span class="text-warning">交互式 (Interactive)</span><br>
+                                        <span style="color: #808080;">></span> 等待光标输入...
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <!-- 三维演示容器 -->
+                                    <div id="affine-demo-container" class="border-0 rounded-4 shadow-lg position-relative h-100" style="min-height: 500px; overflow: hidden; background: #222831;">
+                                        <!-- 徽标叠层 -->
+                                        <div class="position-absolute top-0 start-0 m-3" style="z-index: 10;">
+                                            <span class="badge bg-black bg-opacity-50 text-light shadow-sm border border-secondary px-3 py-2 rounded-pill fw-light" style="font-size: 0.85rem; backdrop-filter: blur(4px);">
+                                                <i class="fas fa-cube text-primary me-2"></i>实时映射视图
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-secondary rounded-pill px-4 js-design-explore" data-target-tab="#tab-pipeline">
+                                点击探索：数据流与延迟 <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 标签 3：数据流与延迟 -->
+                    <div class="tab-pane fade" id="tab-pipeline" role="tabpanel">
+                        <div class="container py-5">
+                            <h4 class="text-center mb-5 fw-light">数据流转与时序 <span class="text-muted fs-6">(Interactive Pipeline)</span></h4>
+                            <div class="pipeline-section pt-4">
+                                <p class="text-center text-muted mb-4 small"><i class="fas fa-hand-pointer me-2"></i>点击节点查看详细数据流转</p>
+                                <div class="pipeline-container d-flex justify-content-between align-items-center position-relative">
+                                    <!-- 连接线 -->
+                                    <div class="pipeline-line"></div>
+                                    <div class="pipeline-particle"></div>
+
+                                    <!-- 节点 -->
+                                    <div class="pipeline-node" onclick="handlePipelineClick(this, 'step_user')">
+                                        <div class="icon"><i class="fas fa-user"></i></div>
+                                        <div class="label">用户指令</div>
+                                    </div>
+                                    <div class="pipeline-node" onclick="handlePipelineClick(this, 'step_ai')">
+                                        <div class="icon"><i class="fas fa-brain"></i></div>
+                                        <div class="label">AI 推理</div>
+                                    </div>
+                                    <div class="pipeline-node" onclick="handlePipelineClick(this, 'step_vlm')">
+                                        <div class="icon"><i class="fas fa-camera"></i></div>
+                                        <div class="label">视觉感知</div>
+                                    </div>
+                                    <div class="pipeline-node" onclick="handlePipelineClick(this, 'step_calc')">
+                                        <div class="icon"><i class="fas fa-calculator"></i></div>
+                                        <div class="label">坐标计算</div>
+                                    </div>
+                                    <div class="pipeline-node" onclick="handlePipelineClick(this, 'step_act')">
+                                        <div class="icon"><i class="fas fa-hand-paper"></i></div>
+                                        <div class="label">物理执行</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-secondary rounded-pill px-4 js-design-explore" data-target-tab="#tab-triad">
+                                重新探索三要素 <i class="fas fa-undo ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div> <!-- 结束：标签内容 -->
+            </div>
+
+            <!-- 自定义弹窗遮罩 -->
+            <div id="designModalOverlay" class="design-modal-overlay">
+                <div class="design-modal-content">
+                    <button class="close-modal-btn" onclick="closeDesignModal()">&times;</button>
+                    <div id="designModalBody">
+                        <!-- 内容由脚本注入 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- 分区：项目详解 -->
+                <div id="section-details" class="app-section">
+                    <div class="container-fluid px-4"> <!-- 加宽布局 -->
+                        <header class="text-center mb-5">
+                            <h1 class="display-5 mb-3 text-gradient">项目核心详解</h1>
+                            <p class="lead">深入剖析 “智能机械臂” 的技术细节、算法原理与实现路径</p>
+                        </header>
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="material-surface shadow-lg rounded-5 overflow-hidden d-flex flex-column flex-lg-row" style="height: 85vh;">
+                                    
+                                    <!-- 左侧：文档预览（主体） -->
+                                    <div class="flex-grow-1 bg-light position-relative p-0 d-flex flex-column">
+                                        <div class="pdf-header p-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="icon-shape bg-danger text-white rounded-circle me-3" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-file-pdf small"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold text-dark">Embodied_AI_Robotics_Project.pdf</h6>
+                                                    <small class="text-muted">24 Pages &bull; 4.5 MB</small>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <a href="Embodied_AI_Robotics_Project.pdf" target="_blank" class="btn btn-icon btn-sm btn-light rounded-circle" title="Open in New Tab"><i class="fas fa-external-link-alt"></i></a>
+                                            </div>
+                                        </div>
+                                        <div id="pdf-iframe-container" class="flex-grow-1 position-relative">
+                                            <iframe id="pdfViewer"
+                                                    src="Embodied_AI_Robotics_Project.pdf" 
+                                                    class="w-100 h-100 border-0" 
+                                                    title="Project PDF">
+                                                <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                                                    <i class="fas fa-file-pdf fa-3x text-secondary mb-3"></i>
+                                                    <p>您的浏览器不支持直接预览 PDF。</p>
+                                                    <a href="Embodied_AI_Robotics_Project.pdf" class="btn btn-primary btn-sm">点击下载文件</a>
+                                                </div>
+                                            </iframe>
+                                        </div>
+                                    </div>
+        
+                                    <!-- 右侧：知识流（侧栏） -->
+                                    <div class="sidebar-panel bg-white border-start" style="width: 100%; max-width: 400px; overflow-y: auto; height: 100%;">
+                                        <div class="p-4">
+                                            <div class="mb-4 px-1">
+                                                <h5 class="fw-bold mb-0 d-flex align-items-center">
+                                                    <i class="fas fa-sparkles text-warning me-2"></i> 核心知识点
+                                                </h5>
+                                            </div>
+                                            
+                                            <div class="d-flex flex-column gap-3">
+                                                <!-- 知识卡 1 -->
+                                                <div class="knowledge-card p-3 rounded-4 bg-blue-subtle-hover transition-all">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-lightbulb text-primary fs-5 mt-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="fw-bold text-dark mb-1">具身智能 (Embodied AI)</h6>
+                                                        <p class="small text-secondary mb-0 lh-sm">
+                                                            将 AI 大脑赋予物理实体，使其能通过“感知-行动”闭环与现实世界交互，而不仅仅是处理文本。
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- 知识卡 2 -->
+                                                <div class="knowledge-card p-3 rounded-4 bg-purple-subtle-hover transition-all">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-brain text-purple fs-5 mt-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="fw-bold text-dark mb-1">ReAct 范式</h6>
+                                                        <p class="small text-secondary mb-0 lh-sm">
+                                                            <strong>Reasoning + Acting</strong>。智能体在执行动作前先进行“思考”，根据观察结果动态调整下一步计划。
+                                                        </p>
+                                                    </div>
+                                                </div>
+        
+                                                <!-- 知识卡 3 -->
+                                                <div class="knowledge-card p-3 rounded-4 bg-green-subtle-hover transition-all">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-eye text-success fs-5 mt-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="fw-bold text-dark mb-1">VLM 视觉语言模型</h6>
+                                                        <p class="small text-secondary mb-0 lh-sm">
+                                                            Vision-Language Model。不仅能“看”到像素，还能“理解”图像语义，如识别“红色的苹果”。
+                                                        </p>
+                                                    </div>
+                                                </div>
+        
+                                                <!-- 知识卡 4 -->
+                                                <div class="knowledge-card p-3 rounded-4 bg-orange-subtle-hover transition-all">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-tools text-warning fs-5 mt-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="fw-bold text-dark mb-1">工具学习 (Tool Use)</h6>
+                                                        <p class="small text-secondary mb-0 lh-sm">
+                                                            LLM 本身无法操作硬件，通过封装 Python 函数（如 `grab_object`）作为“工具”，让 LLM 学会调用。
+                                                        </p>
+                                                    </div>
+                                                </div>
+        
+                                                <!-- 知识卡 5 -->
+                                                <div class="knowledge-card p-3 rounded-4 bg-cyan-subtle-hover transition-all">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-vector-square text-info fs-5 mt-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="fw-bold text-dark mb-1">仿射变换 (Affine)</h6>
+                                                        <p class="small text-secondary mb-0 lh-sm">
+                                                            解决 2D 图像坐标 (u,v) 到 3D 机械臂坐标 (x,y) 的映射难题，消除透视畸变。
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <!-- 下载区 -->
+                                            <div class="mt-5 pt-4 border-top">
+                                                <h6 class="text-uppercase text-muted small fw-bold mb-3 tracking-wide">Resources</h6>
+                                                <div class="d-grid gap-2">
+                                                    <a href="Embodied_AI_Robotics_Project.pptx" download="" class="btn btn-tonal-primary d-flex align-items-center justify-content-between p-3 rounded-3 border-0">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="fas fa-file-powerpoint text-danger me-3 fs-5"></i>
+                                                            <div class="text-start">
+                                                                <div class="fw-bold text-dark small">下载演示文稿</div>
+                                                                <div class="text-muted extra-small">PPTX &bull; Presentation</div>
+                                                            </div>
+                                                        </div>
+                                                        <i class="fas fa-download text-secondary"></i>
+                                                    </a>
+                                                    <a href="Embodied_AI_Robotics_Project.pdf" download="" class="btn btn-tonal-primary d-flex align-items-center justify-content-between p-3 rounded-3 border-0">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="fas fa-file-pdf text-danger me-3 fs-5"></i>
+                                                            <div class="text-start">
+                                                                <div class="fw-bold text-dark small">下载项目文档</div>
+                                                                <div class="text-muted extra-small">PDF &bull; Documentation</div>
+                                                            </div>
+                                                        </div>
+                                                        <i class="fas fa-download text-secondary"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>        </div>
+
+        <!-- 分区：视频 -->
+        <div id="section-video" class="app-section">
+            <header class="text-center mb-5">
+                <h1 class="display-5 mb-3 text-gradient">基于大模型驱动的机械臂垃圾分类</h1>
+                <p class="lead">结合 VLM 视觉大模型与 ReAct 代理机制，实现智能感知与决策</p>
+            </header>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-play-circle"></i> 微课教学视频
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="ratio ratio-16x9 bg-dark rounded-bottom" style="border-radius: 0 0 8px 8px; overflow: hidden; position: relative;">
+                                <video id="tutorialVideo" controls style="width: 100%; height: 100%; object-fit: contain;">
+                                    <source src="demo.mp4" type="video/mp4">
+                                    您的浏览器不支持 HTML5 视频。
+                                </video>
+
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light text-muted small border-top">
+                            <i class="fas fa-info-circle me-1"></i> 本章节时长 8 分钟，主要介绍项目的背景、运行原理以及未来展望和不足。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分区：思维导图 -->
+        <div id="section-mindmap" class="app-section">
+            <header class="text-center mb-5">
+                <h1 class="display-5 mb-3 text-gradient">知识结构思维导图</h1>
+                <p class="lead">点击节点展开/折叠，系统掌握实验核心逻辑</p>
+            </header>
+            
+            <div class="container">
+                <div id="mindmap-container" class="mindmap-root">
+                    <!-- 思维导图内容由脚本注入 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 分区：详细流程 -->
+        <div id="section-tutorial" class="app-section">
+            <div class="row">
+                <!-- 侧栏导航 -->
+                <div class="col-md-3">
+                    <div class="card shadow-sm sticky-top" style="top: 80px; z-index: 100;">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-book-open me-2"></i>全流程实验手册
+                        </div>
+                        <div class="list-group list-group-flush" id="tutorial-list-tab" role="tablist">
+                            <a class="list-group-item list-group-item-action active" id="list-intro-list" data-bs-toggle="list" href="#list-intro" role="tab">
+                                <span class="badge bg-primary rounded-pill me-2">1</span> 实验目标与原理
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-hardware-list" data-bs-toggle="list" href="#list-hardware" role="tab">
+                                <span class="badge bg-primary rounded-pill me-2">2</span> 硬件组装细节
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-env-list" data-bs-toggle="list" href="#list-env" role="tab">
+                                <span class="badge bg-primary rounded-pill me-2">3</span> Linux环境与网络
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-tools-list" data-bs-toggle="list" href="#list-tools" role="tab">
+                                <span class="badge bg-primary rounded-pill me-2">4</span> 核心工具开发
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-calibration-list" data-bs-toggle="list" href="#list-calibration" role="tab">
+                                <span class="badge bg-primary rounded-pill me-2">5</span> 关键：手眼标定
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-advanced-list" data-bs-toggle="list" href="#list-advanced" role="tab">
+                                <span class="badge bg-secondary rounded-pill me-2">6</span> 进阶：放置区标定
+                            </a>
+                            <a class="list-group-item list-group-item-action" id="list-run-list" data-bs-toggle="list" href="#list-run" role="tab">
+                                <span class="badge bg-success rounded-pill me-2">7</span> 运行与故障排查
+                            </a>
+                            <a class="list-group-item list-group-item-action fw-bold text-primary bg-light" href="https://tnt.georgedonne.cn/ailab/iamrobot251120.html" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i> 访问在线实验手册
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 内容区 -->
+                <div class="col-md-9">
+                    <div class="tab-content" id="nav-tabContent">
+                        
+                        <!-- 1. 简介 -->
+                        <div class="tab-pane fade show active" id="list-intro" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-primary border-bottom pb-2 mb-4">1. 实验目标与原理</h3>
+                                    
+                                    <h5 class="fw-bold"><i class="fas fa-bullseye text-danger me-2"></i>实验目标</h5>
+                                    <p>本实验旨在通过软硬件结合，实现一个基于 <strong>大语言模型 (LLM)</strong> 和 <strong>视觉语言模型 (VLM)</strong> 的智能机械臂 Agent。</p>
+                                    <ul class="list-group list-group-flush mb-4 small">
+                                        <li class="list-group-item">1. <strong>理解原理</strong>：掌握六轴机械臂硬件构成及基于 LLM 的 Agent 控制逻辑。</li>
+                                        <li class="list-group-item">2. <strong>剖析算法</strong>：深入分析 VLM 原理及图像空间到物理空间的坐标转换 (仿射变换)。</li>
+                                        <li class="list-group-item">3. <strong>编程实践</strong>：编写 Python 代码实现“感知-决策-执行”闭环。</li>
+                                    </ul>
+
+                                    <h5 class="fw-bold"><i class="fas fa-brain text-info me-2"></i>核心架构 (ReAct)</h5>
+                                    <div class="alert alert-light border">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="badge bg-primary me-2">User</span>
+                                            <span>"把蓝色方块放到垃圾桶"</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-arrow-down mx-3 text-muted"></i>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="badge bg-success me-2">Agent (DeepSeek)</span>
+                                            <span>思考：需要先找到蓝色方块 -> 生成工具链</span>
+                                        </div>
+                                        <div class="bg-dark text-white p-2 rounded small font-monospace mb-2">
+                                            1. take_photo(area="grabbing")<br>
+                                            2. grab_object(name="blue block")<br>
+                                            3. take_photo(area="placement")<br>
+                                            4. move_to(target="trash bin")
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-warning text-dark me-2">Robot</span>
+                                            <span>执行物理动作</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. 硬件 -->
+                        <div class="tab-pane fade" id="list-hardware" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-primary border-bottom pb-2 mb-4">2. 硬件组装细节</h3>
+                                    
+                                    <div class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle me-2"></i><strong>安全第一：</strong> 所有接线请在断电状态下进行。轻拿轻放，保护摄像头排线。
+                                    </div>
+
+                                    <h5 class="fw-bold mt-4">2.1 关键接口连接</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>设备部件</th>
+                                                    <th>连接说明</th>
+                                                    <th>注意事项</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>摄像头 USB</strong></td>
+                                                    <td>机械臂末端 -> 开发板 USB 口</td>
+                                                    <td>用于获取视觉图像</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>机械臂通信 USB</strong></td>
+                                                    <td>机械臂底座侧面 -> 开发板 USB 口</td>
+                                                    <td>底座和开发板紧挨着的地方</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>屏幕电源</strong></td>
+                                                    <td>屏幕 -> 实验室 USB 插座/插头</td>
+                                                    <td>注意与 NLP 实验箱的区别，不用插开发板上</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <h5 class="fw-bold mt-4">2.2 电源适配器区分</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="border p-3 rounded text-center h-100">
+                                                <i class="fas fa-plug fa-2x text-danger mb-2"></i>
+                                                <h6 class="fw-bold">机械臂电源</h6>
+                                                <p class="mb-0 text-danger">直头小圆孔</p>
+                                                <small class="text-muted">线较短，插底座</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="border p-3 rounded text-center h-100">
+                                                <i class="fas fa-microchip fa-2x text-success mb-2"></i>
+                                                <h6 class="fw-bold">开发板电源</h6>
+                                                <p class="mb-0 text-success">直角弯头小圆孔</p>
+                                                <small class="text-muted">插 Jetson Nano</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 p-3 bg-light rounded">
+                                        <strong>摆放要求：</strong> 机械臂底座必须严格放置在图纸标示的“长方形框”内，这直接影响后续坐标的准确性。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. 环境 -->
+                        <div class="tab-pane fade" id="list-env" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-primary border-bottom pb-2 mb-4">3. Linux环境与网络</h3>
+                                    
+                                    <h5 class="fw-bold">3.1 网络配置与登录</h5>
+                                    <ol>
+                                        <li><strong>获取 IP：</strong> 开发板开机后，在终端输入：
+                                            <code class="bg-dark text-white px-2 py-1 rounded ms-2">ifconfig | grep 172</code>
+                                            <div class="text-muted small mt-1">如果有多个 172 开头的 IP，请关闭 WiFi，仅保留有线连接，避免 Ping 不通。</div>
+                                        </li>
+                                        <li><strong>SSH 登录：</strong> 在笔记本终端输入：
+                                            <code class="d-block bg-dark text-white p-2 rounded mt-2">ssh jetson@172.18.xx.xx</code>
+                                            <div class="mt-1">密码：<code>yahboom</code></div>
+                                        </li>
+                                    </ol>
+
+                                    <h5 class="fw-bold mt-4">3.2 Linux 常用命令速查表</h5>
+                                    <table class="table table-sm table-striped font-monospace small">
+                                        <thead><tr><th>命令</th><th>作用</th><th>示例</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>pwd</td><td>显示当前目录</td><td>pwd -> /home/jetson</td></tr>
+                                            <tr><td>ls -l</td><td>列出文件详细信息</td><td>ls -l /</td></tr>
+                                            <tr><td>cd</td><td>切换目录</td><td>cd /elephant-ai</td></tr>
+                                            <tr><td>cp -r</td><td>复制目录</td><td>cp -r source dest</td></tr>
+                                            <tr><td>chown -hR</td><td>修改文件所有者</td><td>sudo chown -hR jetson:jetson dir</td></tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h5 class="fw-bold mt-4">3.3 项目初始化</h5>
+                                    <div class="card bg-light border-0">
+                                        <div class="card-body font-monospace small">
+                                            # 1. 复制示例代码到用户目录<br>
+                                            sudo cp -r /elephant-ai ~/iamrobot_project<br><br>
+                                            # 2. 修改权限<br>
+                                            sudo chown -hR jetson:jetson ~/iamrobot_project<br><br>
+                                            # 3. 修改 agent.py 配置 LLM<br>
+                                            # base_url="https://api.deepseek.com/v1/"<br>
+                                            # model_name="deepseek-chat"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. 工具 -->
+                        <div class="tab-pane fade" id="list-tools" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-primary border-bottom pb-2 mb-4">4. 核心工具开发 (tools.py)</h3>
+                                    <p>Agent 的能力取决于工具的实现。我们需要在 <code>tools.py</code> 中完善以下三个函数：</p>
+
+                                    <div class="accordion" id="accordionToolsDetailed">
+                                        <!-- 工具 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tool-detail-1">
+                                                    📸 1. take_photo (定点拍照)
+                                                </button>
+                                            </h2>
+                                            <div id="tool-detail-1" class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <p><strong>逻辑流程：</strong></p>
+                                                    <ol>
+                                                        <li><strong>参数校验：</strong> 检查 `area_description` 是 "grabbing_area" 还是 "placement_area"。</li>
+                                                        <li><strong>机械臂移动：</strong> 
+                                                            <ul>
+                                                                <li>如果是抓取区，移动到预设坐标 A (高处俯视)。</li>
+                                                                <li>如果是放置区，移动到预设坐标 B。</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><strong>图像采集：</strong> OpenCV 读取摄像头 `cv2.VideoCapture(0)`。</li>
+                                                        <li><strong>图像处理：</strong> <span class="text-danger fw-bold">关键！</span> 进行 Gamma 校正 (gamma=2.1) 以提高亮度，保存为 `captured_image.jpg`。</li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 工具 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tool-detail-2">
+                                                    🤖 2. grab_object (视觉抓取)
+                                                </button>
+                                            </h2>
+                                            <div id="tool-detail-2" class="accordion-collapse collapse">
+                                                <div class="accordion-body">
+                                                    <p><strong>逻辑流程：</strong></p>
+                                                    <ol>
+                                                        <li><strong>VLM 推理：</strong> 读取图片，调用 Qwen-VL API，提示词 "一个{object_name}"，获取像素坐标 `[x1, y1, x2, y2]`。</li>
+                                                        <li><strong>计算中心点：</strong> `center_x = (x1+x2)/2`, `center_y = (y1+y2)/2`。</li>
+                                                        <li><strong>坐标转换：</strong> 调用 `eyeonhand.pixel_to_arm(center)` 将像素转为机械臂坐标。</li>
+                                                        <li><strong>应用偏移：</strong> 读取 `config.json` 中的 `x_offset`, `y_offset` 进行微调。</li>
+                                                        <li><strong>执行动作：</strong>
+                                                            <div class="bg-light p-2 rounded mt-1 font-monospace small">
+                                                                open_gripper() -> 移动到上方(z=200) -> 下放(z=120) -> close_gripper() -> 抬起(z=200)
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 工具 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tool-detail-3">
+                                                    🚚 3. move_to (智能移动)
+                                                </button>
+                                            </h2>
+                                            <div id="tool-detail-3" class="accordion-collapse collapse">
+                                                <div class="accordion-body">
+                                                    <p><strong>参数多态处理：</strong></p>
+                                                    <ul>
+                                                        <li><strong>情况 A：传入坐标列表</strong> (如 `[100, -200]`)
+                                                            <br> -> 直接调用机械臂移动接口。
+                                                        </li>
+                                                        <li><strong>情况 B：传入物体名称</strong> (如 `"trash bin"`)
+                                                            <br> -> <strong>1.</strong> 自动触发放置区拍照逻辑。
+                                                            <br> -> <strong>2.</strong> 调用 VLM 识别垃圾桶坐标。
+                                                            <br> -> <strong>3.</strong> 调用 `pixel_to_arm_place` 转换坐标。
+                                                            <br> -> <strong>4.</strong> 移动并在目标上方释放物体。
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. 标定 -->
+                        <div class="tab-pane fade" id="list-calibration" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-primary border-bottom pb-2 mb-4">5. 关键步骤：手眼标定</h3>
+                                    <p class="lead small">这一步决定了机械臂是“抓到物体”还是“抓空气”。必须非常耐心。</p>
+
+                                    <h5 class="fw-bold">标定原理 (Affine Transformation)</h5>
+                                    <p class="small">我们通过采集 4 组 <strong>(像素坐标 u,v - 机械臂坐标 x,y)</strong> 的对应点，利用最小二乘法解算出变换矩阵。</p>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-6">
+                                            <h6 class="text-secondary fw-bold">Step 1: 物理打点 (x, y)</h6>
+                                            <ul class="small">
+                                                <li>控制机械臂尖端，<strong>依次</strong>触碰工作纸上的 4 个角。</li>
+                                                <li>记录下每次触碰时机械臂的 X, Y 坐标。</li>
+                                                <li>填入 `config.json` 的 <code>"points_arm"</code>。</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-secondary fw-bold">Step 2: 视觉采样 (u, v)</h6>
+                                            <ul class="small">
+                                                <li>机械臂回到拍照姿态，保持不动拍照。</li>
+                                                <li>在照片上用工具(如画图)找 4 个角的像素坐标。</li>
+                                                <li>填入 `config.json` 的 <code>"points_pixel"</code>。</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="fw-bold mt-3">Config.json 示例</h5>
+                                    <pre class="bg-light p-3 border rounded small">
+{
+    "points_pixel": [[320,220], [590,430], [72,31], [590,26]], 
+    "points_arm":   [[210,0],   [140,-80], [280,80], [280,-80]],
+    ...
+}</pre>
+                                    <p class="small text-muted">最后运行标定脚本生成矩阵：<code>python3 eyeonhand.py</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. 进阶 -->
+                        <div class="tab-pane fade" id="list-advanced" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-secondary border-bottom pb-2 mb-4">6. 进阶：放置区标定</h3>
+                                    <p>如果要实现 <code>move to trash bin</code> (语义移动)，仅标定抓取区是不够的，因为放置区在摄像头的另一侧，透视关系不同。</p>
+
+                                    <h5 class="fw-bold">操作流程：</h5>
+                                    <ol class="list-group list-group-numbered list-group-flush mb-4">
+                                        <li class="list-group-item"><strong>确定拍照位：</strong> 调整机械臂到放置区上方，确定一个新的拍照坐标，填入 `take_photo` 的 else 分支。</li>
+                                        <li class="list-group-item"><strong>放置区打点：</strong> 同样的方法，获取放置区 4 个角的机械臂坐标和像素坐标。</li>
+                                        <li class="list-group-item"><strong>更新配置：</strong> 将数据填入 `config.json` 的 <code>points_pixel_place</code> 和 <code>points_arm_place</code>。</li>
+                                        <li class="list-group-item"><strong>代码适配：</strong> 确保 `move_to` 函数在处理物体名称时，调用的是 `eyeonhand.pixel_to_arm_place()` 函数。</li>
+                                    </ol>
+
+                                    <div class="alert alert-info small">
+                                        <i class="fas fa-lightbulb me-2"></i> <strong>提示：</strong> 为了方便对齐，可以将 Z 轴降至 110 (离纸面近一点) 来进行物理打点。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. 运行 -->
+                        <div class="tab-pane fade" id="list-run" role="tabpanel">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h3 class="card-title text-success border-bottom pb-2 mb-4">7. 运行与故障排查</h3>
+                                    
+                                    <h5 class="fw-bold">启动命令</h5>
+                                    <code class="d-block bg-dark text-white p-3 rounded mb-4">sudo python3 agent.py</code>
+                                    
+                                    <h5 class="fw-bold">测试指令集</h5>
+                                    <ul class="list-group mb-4">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>基础测试 (定点移动)</span>
+                                            <code class="text-primary">grab blue cube and move to -80, 200, 110</code>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>进阶测试 (语义移动)</span>
+                                            <code class="text-success">grab fish bone and move to trash bin</code>
+                                        </li>
+                                    </ul>
+
+                                    <h5 class="fw-bold text-danger">常见故障排查</h5>
+                                    <div class="accordion" id="accordionTrouble">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tr1">Ping 不通开发板</button></h2>
+                                            <div id="tr1" class="accordion-collapse collapse"><div class="accordion-body">检查开发板是否同时开启了 WiFi 和有线连接。请关闭 WiFi，或确保你的电脑和开发板在同一网段 (172.18.xx.xx)。</div></div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tr2">抓取位置偏差大</button></h2>
+                                            <div id="tr2" class="accordion-collapse collapse"><div class="accordion-body">1. 检查机械臂底座是否移位。<br>2. 重新进行手眼标定。<br>3. 检查 config.json 中的 offset 偏移量设置。</div></div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tr3">无法识别物体</button></h2>
+                                            <div id="tr3" class="accordion-collapse collapse"><div class="accordion-body">1. 检查摄像头画面是否清晰 (Gamma校正)。<br>2. 检查 VLM API 调用是否超时。<br>3. 确保物体在摄像头的视野范围内。</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分区：闪卡 -->
+        <div id="section-flashcards" class="app-section">
+            <header class="text-center mb-5">
+                <h1 class="display-5 mb-3 text-gradient">知识点闪卡自测</h1>
+                <p class="lead">点击卡片查看答案，检验学习成果</p>
+            </header>
+            
+            <div class="container">
+                <div id="flashcardCarousel" class="carousel slide text-dark" data-bs-interval="false">
+                    <div class="carousel-inner" id="flashcard-carousel-inner">
+                        <!-- 轮播内容由脚本注入 -->
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#flashcardCarousel" data-bs-slide="prev" style="width: 5%;">
+                        <span class="carousel-control-prev-icon bg-secondary rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#flashcardCarousel" data-bs-slide="next" style="width: 5%;">
+                        <span class="carousel-control-next-icon bg-secondary rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <span id="flashcard-counter" class="badge bg-light text-dark border">1 / ?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分区：交互演示 -->
+        <div id="section-demo" class="app-section">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div><i class="fas fa-gamepad"></i> 模拟工作台</div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">System Online</span>
+                                <span id="llmStatusBadge" class="badge llm-badge is-offline">LLM 离线</span>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 d-flex flex-column">
+                            <!-- 三维画布 -->
+                            <div id="canvas-container" class="flex-grow-1" style="height: 500px;">
+                                <canvas id="simCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                                <!-- 悬浮控制栏 -->
+                                <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: rgba(255,255,255,0.9); border-top: 1px solid #eee;">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-7">
+                                            <div class="d-flex align-items-center">
+                                                <small class="text-uppercase text-muted fw-bold me-3" style="font-size: 0.7rem; letter-spacing: 1px;">添加物品</small>
+                                                <div class="color-btn blue" onclick="addBlock('blue')" title="添加蓝色方块"></div>
+                                                <div class="color-btn red" onclick="addBlock('red')" title="添加红色方块"></div>
+                                                <div class="color-btn yellow" onclick="addBlock('yellow')" title="添加黄色方块"></div>
+                                                <div class="color-btn green" onclick="addBlock('green')" title="添加绿色方块"></div>
+                                                <div class="color-btn purple" onclick="addBlock('purple')" title="添加紫色方块"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 text-end">
+                                            <button class="btn btn-outline-secondary btn-sm me-2" id="btnResetView" title="重置视角"><i class="fas fa-sync-alt"></i></button>
+                                            <button class="btn btn-outline-danger btn-sm" id="btnClearObjects"><i class="fas fa-trash-alt me-1"></i> 清空</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-white border-end-0"><i class="fas fa-keyboard text-muted"></i></span>
+                                <input type="text" id="userCommand" class="form-control border-start-0 ps-0" placeholder="请输入指令，例如：把蓝色方块扔进垃圾桶">
+                                <button class="btn btn-primary px-4" id="btnExecute"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-between">
+                                <small class="text-muted"><i class="fas fa-lightbulb text-warning me-1"></i> 提示：点击场景中的方块可直接删除。</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fas fa-terminal"></i> 系统日志
+                        </div>
+                        <div class="card-body p-0" style="position: relative;">
+                            <div id="logConsole" class="p-3" style="height: 600px; overflow-y: auto;">
+                                <div class="log-entry system"><strong>[系统]:</strong> 系统初始化完成。</div>
+                                <div class="log-entry system"><strong>[系统]:</strong> 等待指令...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="text-center py-4 text-secondary small">
+        <p>&copy; 智能机械臂微课平台 - Designed By 张昊贞</p>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
